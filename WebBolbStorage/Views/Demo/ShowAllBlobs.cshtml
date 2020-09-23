@@ -1,0 +1,45 @@
+﻿
+@model List<FileData>
+@{
+    ViewData["Title"] = "Dropbox";
+}
+
+<h1>Dropbox</h1>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>FileName</th>
+            <th>FileSize</th>
+            <th>ModifiedOn</th>
+            <th>Download</th>
+            @*<th>Delete</th>*@
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var data in Model)
+        {
+            <tr>
+                <td>@data.FileName</td>
+                <td>@data.FileSize</td>
+                <td>@data.ModifiedOn</td>
+                <td> <a href="/Demo/Download?blobName=@data.FileName" class="btn btn-success">Download</a> </td>
+                @*<td> <a href="/Demo/Delete?blobName=@data.FileName" class="btn btn-danger">Delete</a> </td>*@
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+<div class="row">
+    <div class="col-md-6">
+        <form method="post" enctype="multipart/form-data" asp-controller="Demo" asp-action="Create">
+            <div class="form-group">
+                <label> Select File </label>
+                <input class="form-control" name="files" multiple="multiple" type="file" />
+            </div>
+            <div class="form-group">
+                <input class="btn btn-primary" type="submit" value="Upload" />
+            </div>
+        </form>
+    </div>
+</div>
+
